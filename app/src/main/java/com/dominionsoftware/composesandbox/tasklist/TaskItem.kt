@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun TaskItemStateful(task: Task, onDelete: () -> Unit, modifier: Modifier) {
+fun TaskItemStateful(task: Task, onDelete: (index: Int) -> Unit, modifier: Modifier) {
     var checked by rememberSaveable { mutableStateOf(false) }
 
     TaskItemStateless(
@@ -28,13 +28,13 @@ fun TaskItemStateless(
     task: Task,
     checked: Boolean,
     onCheckedChanged: (newChecked: Boolean) -> Unit,
-    onDelete: () -> Unit,
+    onDelete: (index: Int) -> Unit,
     modifier: Modifier
 ) {
     Row(modifier) {
         Text(text = task.text, modifier = Modifier.weight(1f))
         Checkbox(checked, onCheckedChanged)
-        Button(onClick = onDelete) {
+        Button(onClick = { onDelete(task.id) }) {
             Text(text = "Delete")
         }
     }

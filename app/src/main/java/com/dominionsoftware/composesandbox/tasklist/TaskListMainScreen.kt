@@ -7,6 +7,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,20 +26,22 @@ fun TaskListMainScreen() {
 }
 
 @Composable
-fun TaskListStateful(data: List<Task>) {
+fun TaskListStateful(data: MutableList<Task>) {
+    val _tasks = remember { data.toMutableStateList() }
+
     LazyColumn {
-        items(data) { task ->
+        items(_tasks) { task ->
             TaskItemStateful(
                 task = task,
-                onDelete = {
-
+                onDelete = { index ->
+                    _tasks.removeAt(index)
                 },
                 modifier = Modifier.padding(all = 4.dp))
         }
     }
 }
 
-val fakeData = List(100) { index -> Task(index, "Task with number $index") }
+val fakeData = MutableList(100) { index -> Task(index, "Task with number $index") }
 
 @Composable
 @Preview
