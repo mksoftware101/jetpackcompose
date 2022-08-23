@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,8 +26,8 @@ fun DrinkWaterCounterMainScreen() {
 
 @Composable
 private fun DrinkWaterCounterStateful() {
-    var counter by remember { mutableStateOf(0) }
-    var enabled by remember { mutableStateOf(true) }
+    var counter by rememberSaveable { mutableStateOf(0) }
+    var enabled by rememberSaveable { mutableStateOf(true) }
 
     DrinkWaterCounterStateless(
         counter = counter,
