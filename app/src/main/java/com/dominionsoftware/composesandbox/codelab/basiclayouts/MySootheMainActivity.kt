@@ -8,10 +8,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
@@ -84,7 +81,7 @@ class MySootheMainActivity : ComponentActivity() {
             )
             Text(
                 stringResource(id = text),
-                style = MaterialTheme.typography.h3,
+                style = MaterialTheme.typography.subtitle1,
                 modifier = Modifier.paddingFromBaseline(top = 24.dp, bottom = 8.dp)
             )
         }
@@ -93,6 +90,46 @@ class MySootheMainActivity : ComponentActivity() {
     @Composable
     @Preview
     fun AlignYourBodyElementPreview() {
-        AlignYourBodyElement(drawable = R.drawable.ab1_inversions, text = R.string.ab1_inversions, modifier = Modifier)
+        AlignYourBodyElement(
+            drawable = R.drawable.ab1_inversions,
+            text = R.string.ab1_inversions,
+            modifier = Modifier
+        )
+    }
+
+    @Composable
+    fun FavouriteCollectionCard(
+        @DrawableRes drawable: Int,
+        @StringRes text: Int,
+        modifier: Modifier
+    ) {
+        Surface(shape = MaterialTheme.shapes.small, modifier = modifier) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.width(192.dp)
+            ) {
+                Image(
+                    painterResource(id = drawable),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.size(56.dp)
+                )
+                Text(
+                    stringResource(id = text),
+                    style = MaterialTheme.typography.subtitle1,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+            }
+        }
+    }
+
+    @Composable
+    @Preview
+    fun FavouriteCollectionCardPreview() {
+        FavouriteCollectionCard(
+            drawable = R.drawable.fc2_nature_meditations,
+            text = R.string.fc2_nature_meditations,
+            Modifier
+        )
     }
 }
