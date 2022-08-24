@@ -12,14 +12,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun StatefulWellnessTaskItem(taskName: String, modifier: Modifier) {
+fun StatefulWellnessTaskItem(
+    taskName: String,
+    onClose: () -> Unit,
+    modifier: Modifier
+) {
     var checkedState by rememberSaveable { mutableStateOf(false) }
 
     StatelessWellnessTaskItem(
         taskName = taskName,
         checked = checkedState,
         onCheckedChange = { newValue -> checkedState = newValue },
-        onClose = {},
+        onClose = onClose,
         modifier = modifier
     )
 }
