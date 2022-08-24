@@ -1,4 +1,4 @@
-package com.dominionsoftware.composesandbox.wellnesstasks
+package com.dominionsoftware.composesandbox.codelab.wellnesstasks
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn

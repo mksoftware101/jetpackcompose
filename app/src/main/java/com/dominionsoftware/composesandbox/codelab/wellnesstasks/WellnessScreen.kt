@@ -1,4 +1,4 @@
-package com.dominionsoftware.composesandbox.wellnesstasks
+package com.dominionsoftware.composesandbox.codelab.wellnesstasks
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

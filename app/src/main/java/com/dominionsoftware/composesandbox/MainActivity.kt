@@ -8,7 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.dominionsoftware.composesandbox.ui.theme.ComposeSandboxTheme
-import com.dominionsoftware.composesandbox.wellnesstasks.WellnessScreen
+import com.dominionsoftware.composesandbox.codelab.wellnesstasks.WellnessScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.dominionsoftware.composesandbox.watercounter
+package com.dominionsoftware.composesandbox.codelab.watercounter
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
