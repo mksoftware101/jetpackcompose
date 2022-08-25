@@ -29,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dominionsoftware.composesandbox.R
 import com.dominionsoftware.composesandbox.ui.theme.ComposeSandboxTheme
+import java.util.*
 
 class MySootheMainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -141,7 +142,7 @@ class MySootheMainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun AlignYourBodyRow(modifier: Modifier) {
+    fun AlignYourBodyRow(modifier: Modifier = Modifier) {
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             contentPadding = PaddingValues(horizontal = 16.dp),
@@ -181,6 +182,34 @@ class MySootheMainActivity : ComponentActivity() {
     @Preview
     fun FavouriteCollectionGridPreview() {
         FavouriteCollectionGrid(Modifier)
+    }
+
+    @Composable
+    fun HomeSection(
+        @StringRes title: Int,
+        modifier: Modifier = Modifier,
+        content: @Composable () -> Unit
+    ) {
+        Column(modifier = modifier) {
+            Text(
+                stringResource(id = title).uppercase(Locale.getDefault()),
+                style = MaterialTheme.typography.subtitle1,
+                modifier = Modifier
+                    .paddingFromBaseline(top = 40.dp, bottom = 8.dp)
+                    .padding(16.dp)
+            )
+            content()
+        }
+    }
+
+    @Preview(showBackground = true, backgroundColor = 0xFF0EAE2)
+    @Composable
+    fun HomeSectionPreview() {
+        ComposeSandboxTheme {
+            HomeSection(title = R.string.align_your_body) {
+                AlignYourBodyRow()
+            }
+        }
     }
 
     private val alignYourBodyData = listOf(
