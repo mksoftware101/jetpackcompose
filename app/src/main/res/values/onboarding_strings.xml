@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboardingFirstScreenTitle">Get inspired</string>
+    <string name="onboardingFirstScreenText">Don\'t know what to eat? Take a picture, we\'ll suggest things to cook with your ingredients.</string>
+    <string name="onboardingButtonSkip">Skip</string>
+    <string name="onboardingButtonNext">Next</string>
+    <string name="onboardingSecondScreenTitle">Easy &amp; healthy</string>
+    <string name="onboardingSecondScreenText">Find thousands of easy and healthy recipes so you save time and eat better.</string>
+    <string name="onboardingThirdScreenTitle">Save your favorites</string>
+    <string name="onboardingThirdScreenText">Save your favorite recipies and get reminders to buy the ingredients to cook them.</string>
+    <string name="onboardingThirdScreenGetStartedButton">Get started</string>
+</resources>
