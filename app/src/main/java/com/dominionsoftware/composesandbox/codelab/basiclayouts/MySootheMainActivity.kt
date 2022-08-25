@@ -6,8 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -17,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -103,7 +108,7 @@ class MySootheMainActivity : ComponentActivity() {
     fun FavouriteCollectionCard(
         @DrawableRes drawable: Int,
         @StringRes text: Int,
-        modifier: Modifier
+        modifier: Modifier = Modifier
     ) {
         Surface(shape = MaterialTheme.shapes.small, modifier = modifier) {
             Row(
@@ -155,6 +160,27 @@ class MySootheMainActivity : ComponentActivity() {
     @Preview
     fun AlignYourBodyRowPreview() {
         AlignYourBodyRow(Modifier)
+    }
+
+    @Composable
+    fun FavouriteCollectionGrid(modifier: Modifier) {
+        LazyHorizontalGrid(
+            rows = GridCells.Fixed(count = 2),
+            modifier = modifier.height(120.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            contentPadding = PaddingValues(16.dp)
+        ) {
+            items(favoriteCollectionsData) { item ->
+                FavouriteCollectionCard(drawable = item.drawable, text = item.text)
+            }
+        }
+    }
+
+    @Composable
+    @Preview
+    fun FavouriteCollectionGridPreview() {
+        FavouriteCollectionGrid(Modifier)
     }
 
     private val alignYourBodyData = listOf(
