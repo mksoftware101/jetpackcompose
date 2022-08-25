@@ -18,13 +18,16 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Spa
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -39,11 +42,6 @@ class MySootheMainActivity : ComponentActivity() {
         setContent {
             MySootheApp()
         }
-    }
-
-    @Composable
-    fun MySootheApp() {
-        SearchBar(modifier = Modifier.padding(8.dp))
     }
 
     @Composable
@@ -236,6 +234,56 @@ class MySootheMainActivity : ComponentActivity() {
     @Composable
     fun HomeScreenPreview() {
         HomeScreen()
+    }
+
+    @Composable
+    private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
+        BottomNavigation(
+            backgroundColor = MaterialTheme.colors.background,
+            modifier = modifier,
+        ) {
+            BottomNavigationItem(
+                selected = true,
+                onClick = { /*TODO*/ },
+                icon = {
+                    Icon(Icons.Default.Spa, contentDescription = null)
+                },
+                label = {
+                    Text(stringResource(id = R.string.bottom_navigation_home))
+                }
+            )
+            BottomNavigationItem(
+                selected = true,
+                onClick = { /*TODO*/ },
+                icon = {
+                    Icon(Icons.Default.AccountCircle, contentDescription = null)
+                },
+                label = {
+                    Text(stringResource(id = R.string.bottom_navigation_profile))
+                }
+            )
+        }
+    }
+
+    @Preview
+    @Composable
+    fun SootheBottomNavigationPreview() {
+        SootheBottomNavigation()
+    }
+
+    @Composable
+    fun MySootheApp() {
+        Scaffold(bottomBar = { SootheBottomNavigation() }) { padding ->
+            HomeScreen()
+        }
+    }
+
+    @Preview(widthDp = 360, heightDp = 640)
+    @Composable
+    fun MySootheAppPreview() {
+        ComposeSandboxTheme {
+            MySootheApp()
+        }
     }
 
     private val alignYourBodyData = listOf(
