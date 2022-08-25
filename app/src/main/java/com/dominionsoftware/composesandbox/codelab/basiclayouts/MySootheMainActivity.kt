@@ -13,7 +13,9 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -45,7 +47,7 @@ class MySootheMainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun SearchBar(modifier: Modifier) {
+    fun SearchBar(modifier: Modifier = Modifier) {
         TextField(
             value = "",
             onValueChange = {},
@@ -164,7 +166,7 @@ class MySootheMainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun FavouriteCollectionGrid(modifier: Modifier) {
+    fun FavouriteCollectionGrid(modifier: Modifier = Modifier) {
         LazyHorizontalGrid(
             rows = GridCells.Fixed(count = 2),
             modifier = modifier.height(120.dp),
@@ -210,6 +212,30 @@ class MySootheMainActivity : ComponentActivity() {
                 AlignYourBodyRow()
             }
         }
+    }
+
+    @Composable
+    fun HomeScreen(modifier: Modifier = Modifier) {
+        Column(
+            modifier = modifier
+                .verticalScroll(rememberScrollState())
+        ) {
+            Spacer(modifier = Modifier.height(16.dp))
+            SearchBar(Modifier.padding(horizontal = 16.dp))
+            HomeSection(title = R.string.align_your_body) {
+                AlignYourBodyRow()
+            }
+            HomeSection(title = R.string.favorite_collections) {
+                FavouriteCollectionGrid()
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+    }
+
+    @Preview(showBackground = true, backgroundColor = 0xFF0EAE2, heightDp = 180)
+    @Composable
+    fun HomeScreenPreview() {
+        HomeScreen()
     }
 
     private val alignYourBodyData = listOf(
