@@ -1,5 +1,6 @@
 package com.dominionsoftware.composesandbox.onboarding
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -148,6 +149,14 @@ private fun SystemBarsColor(backgroundColor: Int) {
 @Preview(widthDp = 360, heightDp = 722)
 @Composable
 fun OnboardingScreenPreview_GalaxyS20FE() {
+    ComposeSandboxTheme {
+        OnboardingScreen()
+    }
+}
+
+@Preview(widthDp = 360, heightDp = 722, uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun OnboardingScreenDarkModePreview_GalaxyS20FE() {
     ComposeSandboxTheme {
         OnboardingScreen()
     }
