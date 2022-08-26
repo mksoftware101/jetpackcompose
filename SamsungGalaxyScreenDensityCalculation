@@ -1,0 +1,19 @@
+Phone: Samsung Galaxy SM-G780F
+App: ScreenInfo
+
+Info about screen in S.Galaxy:
+
+Screen = 480dpi
+
+Height = 2400px = 800dp
+Usable height = 2168px
+
+Width = UsableWidth = 1080px = 360dp
+
+
+
+DP calculation based on above info:
+
+Usable height = (2168px * 160) / 480dpi = 722dp
+
+See: https://material.io/design/layout/pixel-density.html#pixel-density-on-android

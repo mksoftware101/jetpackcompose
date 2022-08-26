@@ -38,7 +38,7 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
             .background(colorResource(id = R.color.color1))
     ) {
         Column(modifier = Modifier.weight(1f)) {
-            Spacer(Modifier.height(100.dp))
+            Spacer(Modifier.height(46.dp))
             Row {
                 Image(
                     painter = painterResource(id = R.drawable.onboarding_pic1),
@@ -47,7 +47,7 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
                     contentScale = ContentScale.FillWidth
                 )
             }
-            Spacer(modifier = Modifier.height(56.dp))
+            Spacer(modifier = Modifier.height(36.dp))
             Row(horizontalArrangement = Arrangement.Center) {
                 Text(
                     text = stringResource(id = R.string.onboardingFirstScreenTitle),
@@ -59,16 +59,16 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
                     modifier = Modifier.weight(1f)
                 )
             }
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(26.dp))
             Row(
                 horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.padding(start = 32.dp, end = 32.dp)
+                modifier = Modifier.padding(start = 32.dp, end = 26.dp)
             ) {
                 Text(
                     text = stringResource(id = R.string.onboardingFirstScreenText),
                     color = colorResource(id = R.color.white),
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.h5.copy(lineHeight = 30.sp),
+                    style = MaterialTheme.typography.h6.copy(lineHeight = 24.sp),
                     fontWeight = FontWeight.Light,
                 )
             }
@@ -103,7 +103,7 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(heightDp = 940, widthDp = 430)
+@Preview(widthDp = 360, heightDp = 722)
 @Composable
 fun OnboardingScreenPreview() {
     ComposeSandboxTheme {
