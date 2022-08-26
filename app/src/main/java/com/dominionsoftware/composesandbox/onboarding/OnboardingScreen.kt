@@ -78,14 +78,13 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
                     fontWeight = FontWeight.Light,
                 )
             }
-            Spacer(modifier = Modifier.height(32.dp))
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 32.dp, end = 32.dp, bottom = 32.dp)
+                .padding(all = 32.dp)
         ) {
             Text(
                 text = stringResource(id = R.string.onboardingButtonSkip),
@@ -112,7 +111,15 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
 
 @Preview(widthDp = 360, heightDp = 722)
 @Composable
-fun OnboardingScreenPreview() {
+fun OnboardingScreenPreview_GalaxyS20FE() {
+    ComposeSandboxTheme {
+        OnboardingScreen()
+    }
+}
+
+@Preview(widthDp = 360, heightDp = 640)
+@Composable
+fun OnboardingScreenPreview_GalaxyS7() {
     ComposeSandboxTheme {
         OnboardingScreen()
     }
