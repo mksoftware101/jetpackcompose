@@ -3,11 +3,8 @@ package com.dominionsoftware.composesandbox.onboarding
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -36,7 +33,6 @@ fun OnboardingScreen() {
         text = R.string.onboardingFirstScreenText,
         picture = R.drawable.onboarding_pic1,
         backgroundColor = R.color.color1,
-        textColor = R.color.white,
         isLastScreen = false
     )
 }
@@ -47,7 +43,6 @@ fun OnboardingComponent(
     @StringRes text: Int,
     @DrawableRes picture: Int,
     @ColorRes backgroundColor: Int,
-    @ColorRes textColor: Int,
     isLastScreen: Boolean,
     modifier: Modifier = Modifier
 ) {
@@ -76,7 +71,7 @@ fun OnboardingComponent(
             Row(horizontalArrangement = Arrangement.Center) {
                 Text(
                     text = stringResource(id = title),
-                    color = colorResource(id = textColor),
+                    color = MaterialTheme.colors.onPrimary,
                     style = MaterialTheme.typography.h4,
                     letterSpacing = 1.5.sp,
                     fontWeight = FontWeight.Bold,
@@ -91,7 +86,7 @@ fun OnboardingComponent(
             ) {
                 Text(
                     text = stringResource(id = text),
-                    color = colorResource(id = textColor),
+                    color = MaterialTheme.colors.onPrimary,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h6.copy(lineHeight = 24.sp),
                     fontWeight = FontWeight.Light,
@@ -108,30 +103,30 @@ fun OnboardingComponent(
             if (isLastScreen) {
                 GetStartedButton()
             } else {
-                OnboardingNavigationButtons(textColor)
+                OnboardingNavigationButtons()
             }
         }
     }
 }
 
 @Composable
-private fun OnboardingNavigationButtons(textColor: Int) {
+private fun OnboardingNavigationButtons() {
     Text(
         text = stringResource(id = R.string.onboardingButtonSkip),
-        color = colorResource(id = textColor),
+        color = MaterialTheme.colors.onPrimary,
         fontWeight = FontWeight.Light,
     )
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
             text = stringResource(id = R.string.onboardingButtonNext),
             fontWeight = FontWeight.Bold,
-            color = colorResource(id = textColor)
+            color = MaterialTheme.colors.onPrimary
         )
         Spacer(modifier = Modifier.padding(4.dp))
         Image(
             imageVector = Icons.Default.ArrowForward,
             contentDescription = "Next",
-            colorFilter = ColorFilter.tint(colorResource(id = textColor))
+            colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
         )
     }
 }
@@ -146,7 +141,7 @@ private fun SystemBarsColor(backgroundColor: Int) {
     val systemUiController = rememberSystemUiController()
     systemUiController.setSystemBarsColor(
         color = colorResource(id = backgroundColor),
-        darkIcons = false
+        darkIcons = isSystemInDarkTheme()
     )
 }
 
