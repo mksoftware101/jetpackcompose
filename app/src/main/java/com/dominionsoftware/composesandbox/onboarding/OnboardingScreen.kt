@@ -4,6 +4,8 @@ import android.graphics.fonts.FontStyle
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -37,7 +39,11 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .background(colorResource(id = R.color.color1))
     ) {
-        Column(modifier = Modifier.weight(1f)) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState())
+        ) {
             Spacer(Modifier.height(46.dp))
             Row {
                 Image(
@@ -59,10 +65,10 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
                     modifier = Modifier.weight(1f)
                 )
             }
-            Spacer(modifier = Modifier.height(26.dp))
+            Spacer(modifier = Modifier.height(24.dp))
             Row(
                 horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.padding(start = 32.dp, end = 26.dp)
+                modifier = Modifier.padding(start = 32.dp, end = 32.dp)
             ) {
                 Text(
                     text = stringResource(id = R.string.onboardingFirstScreenText),
@@ -72,6 +78,7 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
                     fontWeight = FontWeight.Light,
                 )
             }
+            Spacer(modifier = Modifier.height(32.dp))
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
