@@ -6,15 +6,18 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -94,47 +97,70 @@ fun OnboardingComponent(
                 )
             }
         }
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 32.dp, end = 32.dp, top = 32.dp, bottom = 20.dp)
-        ) {
-            if (isLastScreen) {
-                GetStartedButton()
-            } else {
-                OnboardingNavigationButtons()
-            }
+        if (isLastScreen) {
+            GetStartedButton()
+        } else {
+            OnboardingNavigationButtons()
         }
     }
 }
 
 @Composable
 private fun OnboardingNavigationButtons() {
-    Text(
-        text = stringResource(id = R.string.onboardingButtonSkip),
-        color = MaterialTheme.colors.onPrimary,
-        fontWeight = FontWeight.Light,
-    )
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 32.dp, end = 32.dp, top = 32.dp, bottom = 20.dp)
+    ) {
         Text(
-            text = stringResource(id = R.string.onboardingButtonNext),
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colors.onPrimary
+            text = stringResource(id = R.string.onboardingButtonSkip),
+            color = MaterialTheme.colors.onPrimary,
+            fontWeight = FontWeight.Light,
         )
-        Spacer(modifier = Modifier.padding(4.dp))
-        Image(
-            imageVector = Icons.Default.ArrowForward,
-            contentDescription = "Next",
-            colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
-        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = stringResource(id = R.string.onboardingButtonNext),
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colors.onPrimary
+            )
+            Spacer(modifier = Modifier.padding(4.dp))
+            Image(
+                imageVector = Icons.Default.ArrowForward,
+                contentDescription = "Next",
+                colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
+            )
+        }
     }
 }
 
 @Composable
 fun GetStartedButton() {
-    TODO("Not yet implemented")
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 32.dp, end = 32.dp, top = 32.dp, bottom = 20.dp)
+    ) {
+        Surface(
+            shape = RoundedCornerShape(32.dp),
+            modifier = Modifier.weight(1f)
+        ) {
+            Button(
+                colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.color5)),
+                onClick = { /*TODO*/ },
+                modifier = Modifier.height(56.dp)
+            ) {
+                Text(
+                    text = stringResource(id = R.string.onboardingThirdScreenGetStartedButton),
+                    style = MaterialTheme.typography.button.copy(fontSize = 18.sp),
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+    }
 }
 
 @Composable
@@ -151,6 +177,20 @@ private fun SystemBarsColor(backgroundColor: Int) {
 fun OnboardingScreenPreview_GalaxyS20FE() {
     ComposeSandboxTheme {
         OnboardingScreen()
+    }
+}
+
+@Preview(name = "Last screen", widthDp = 360, heightDp = 722)
+@Composable
+fun OnboardingScreenPreview_GalaxyS20FE_LastScreen() {
+    ComposeSandboxTheme {
+        OnboardingComponent(
+            title = R.string.onboardingFirstScreenTitle,
+            text = R.string.onboardingFirstScreenText,
+            picture = R.drawable.onboarding_pic1,
+            backgroundColor = R.color.color1,
+            isLastScreen = true
+        )
     }
 }
 
