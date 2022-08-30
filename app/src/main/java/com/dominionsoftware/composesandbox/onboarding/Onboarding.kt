@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -22,8 +23,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dominionsoftware.composesandbox.R
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPagerIndicator
+import com.google.accompanist.pager.PagerState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun OnboardingComponent(
     @StringRes title: Int,
@@ -31,6 +36,7 @@ fun OnboardingComponent(
     @DrawableRes picture: Int,
     @ColorRes backgroundColor: Int,
     isLastScreen: Boolean,
+    pagerState: PagerState,
     modifier: Modifier = Modifier
 ) {
     SystemBarsColor(backgroundColor)
@@ -78,6 +84,15 @@ fun OnboardingComponent(
                     style = MaterialTheme.typography.h6.copy(lineHeight = 24.sp),
                     fontWeight = FontWeight.Light,
                 )
+            }
+            Spacer(modifier = Modifier.height(48.dp))
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .padding(start = 32.dp, end = 32.dp)
+                    .fillMaxWidth()
+            ) {
+                HorizontalPagerIndicator(pagerState = pagerState, activeColor = MaterialTheme.colors.onPrimary)
             }
         }
         if (isLastScreen) {

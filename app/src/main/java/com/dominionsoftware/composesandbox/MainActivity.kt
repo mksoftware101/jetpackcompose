@@ -9,6 +9,7 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.dominionsoftware.composesandbox.ui.theme.ComposeSandboxTheme
 import com.dominionsoftware.composesandbox.onboarding.GetInspiredScreen
+import com.dominionsoftware.composesandbox.onboarding.OnboardingMainScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
                 ) {
 //                    WaterCounterMainScreen()
 //                    WellnessScreen()
-                    GetInspiredScreen()
+                    OnboardingMainScreen()
                 }
             }
         }

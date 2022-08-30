@@ -4,24 +4,30 @@ import android.content.res.Configuration
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.dominionsoftware.composesandbox.R
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.PagerState
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
-fun SaveYourFavouritiesScreen() {
+fun SaveYourFavouritiesScreen(pagerState: PagerState, isLastScreen: Boolean) {
     OnboardingComponent(
         title = R.string.onboardingThirdScreenTitle,
         text = R.string.onboardingThirdScreenText,
         picture = R.drawable.onboarding_pic3,
         backgroundColor = R.color.color7,
-        isLastScreen = true
+        pagerState = pagerState,
+        isLastScreen = isLastScreen
     )
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Preview(name = "GalaxyS 20FE", widthDp = 360, heightDp = 722)
 @Composable
 fun SaveYourFavouritiesScreenPreview_GalaxyS20FE() {
-    SaveYourFavouritiesScreen()
+    SaveYourFavouritiesScreen(pagerState = PagerState(0), isLastScreen = true)
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Preview(
     name = "GalaxyS 20FE dark mode",
     widthDp = 360,
@@ -30,11 +36,12 @@ fun SaveYourFavouritiesScreenPreview_GalaxyS20FE() {
 )
 @Composable
 fun SaveYourFavouritiesScreenPreview_GalaxyS20FE_DarkMode() {
-    SaveYourFavouritiesScreen()
+    SaveYourFavouritiesScreen(pagerState = PagerState(0), isLastScreen = true)
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Preview(name = "Smaller screen", widthDp = 360, heightDp = 640)
 @Composable
 fun SaveYourFavouritiesScreenPreview_GalaxyS7_LowerScreen() {
-    SaveYourFavouritiesScreen()
+    SaveYourFavouritiesScreen(pagerState = PagerState(0), isLastScreen = true)
 }
