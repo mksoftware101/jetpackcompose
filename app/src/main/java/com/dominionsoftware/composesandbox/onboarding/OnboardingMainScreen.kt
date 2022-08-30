@@ -2,10 +2,8 @@ package com.dominionsoftware.composesandbox.onboarding
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.HorizontalPagerIndicator
-import com.google.accompanist.pager.rememberPagerState
+import com.dominionsoftware.composesandbox.ui.theme.ComposeSandboxTheme
+import com.google.accompanist.pager.*
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -24,4 +22,12 @@ fun OnboardingMainScreen() {
 @Composable
 fun OnboardingMainScreenPreview() {
     OnboardingMainScreen()
+}
+
+@Preview(widthDp = 360, heightDp = 722)
+@Composable
+fun OnboardingMainScreenPreview_GalaxyS20FE() {
+    ComposeSandboxTheme {
+        OnboardingMainScreen()
+    }
 }

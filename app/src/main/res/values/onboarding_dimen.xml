@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="onboardingImage">46dp</dimen>
+    <dimen name="onboardingTitle">36dp</dimen>
+    <dimen name="onboardingText">24dp</dimen>
+    <dimen name="onboardingStartEnd">32dp</dimen>
+    <dimen name="onboardingPageIndicator">46dp</dimen>
+    <dimen name="onboardingNavButtonsBottom">20dp</dimen>
+</resources>
