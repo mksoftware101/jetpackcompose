@@ -17,12 +17,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dominionsoftware.composesandbox.R
@@ -42,88 +40,70 @@ fun OnboardingComponent(
     isLastScreen: Boolean,
     modifier: Modifier = Modifier
 ) {
-    SystemBarsColor(backgroundColor)
+    SystemBarsColor()
+
+    val bottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
 
     Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
             .background(colorResource(id = backgroundColor))
+            .verticalScroll(rememberScrollState())
+            .padding(start = 32.dp, end = 32.dp, bottom = bottomPadding)
     ) {
-        Column(
+        Spacer(modifier = Modifier.weight(1f))
+        Image(
+            painter = painterResource(id = picture),
+            contentDescription = null,
             modifier = Modifier
-                .weight(1f)
-                .verticalScroll(rememberScrollState())
-        ) {
-            Image(
-                painter = painterResource(id = picture),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = dimensionResource(id = R.dimen.onboardingImage)),
-                contentScale = ContentScale.FillWidth
-            )
-            Text(
-                text = stringResource(id = title),
-                color = MaterialTheme.colors.onPrimary,
-                style = MaterialTheme.typography.h4,
-                letterSpacing = 1.5.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(top = dimensionResource(id = R.dimen.onboardingTitle))
-            )
-            Text(
-                text = stringResource(id = text),
-                color = MaterialTheme.colors.onPrimary,
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.h6.copy(lineHeight = 24.sp),
-                fontWeight = FontWeight.Light,
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(
-                        top = dimensionResource(id = R.dimen.onboardingText),
-                        start = dimensionResource(id = R.dimen.onboardingStartEnd),
-                        end = dimensionResource(id = R.dimen.onboardingStartEnd)
-                    )
-            )
-            HorizontalPagerIndicator(
-                pagerState = pagerState,
-                activeColor = MaterialTheme.colors.onPrimary,
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(
-                        top = dimensionResource(id = R.dimen.onboardingPageIndicator),
-                        start = dimensionResource(id = R.dimen.onboardingStartEnd),
-                        end = dimensionResource(id = R.dimen.onboardingStartEnd)
-                    )
-            )
-        }
+                .fillMaxWidth(),
+            contentScale = ContentScale.FillWidth
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        Text(
+            text = stringResource(id = title),
+            color = MaterialTheme.colors.onPrimary,
+            style = MaterialTheme.typography.h4,
+            letterSpacing = 1.5.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+        )
+        Text(
+            text = stringResource(id = text),
+            color = MaterialTheme.colors.onPrimary,
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.h6.copy(lineHeight = 24.sp),
+            fontWeight = FontWeight.Light,
+            modifier = Modifier
+                .padding(top = 24.dp)
+        )
+        HorizontalPagerIndicator(
+            pagerState = pagerState,
+            activeColor = MaterialTheme.colors.onPrimary,
+            modifier = Modifier
+                .padding(top = 36.dp)
+        )
+        Spacer(modifier = Modifier.weight(2f))
+
+        val buttonsModifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp)
+
         if (isLastScreen) {
-            GetStartedButton()
+            GetStartedButton(buttonsModifier)
         } else {
-            OnboardingNavigationButtons()
+            OnboardingNavigationButtons(buttonsModifier)
         }
     }
 }
 
 @Composable
-private fun OnboardingNavigationButtons() {
-    val bottomPadding =
-        WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding() +
-                dimensionResource(id = R.dimen.onboardingNavButtonsBottom)
-
+private fun OnboardingNavigationButtons(modifier: Modifier) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(
-                start = dimensionResource(id = R.dimen.onboardingStartEnd),
-                end = dimensionResource(id = R.dimen.onboardingStartEnd),
-                top = dimensionResource(id = R.dimen.onboardingStartEnd),
-                bottom = bottomPadding,
-            )
+        modifier = modifier
     ) {
         Text(
             text = stringResource(id = R.string.onboardingButtonSkip),
@@ -147,23 +127,11 @@ private fun OnboardingNavigationButtons() {
 }
 
 @Composable
-fun GetStartedButton() {
-    val bottomPadding =
-        WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding() + dimensionResource(
-            id = R.dimen.onboardingNavButtonsBottom
-        )
-
+fun GetStartedButton(modifier: Modifier) {
     Row(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(
-                start = dimensionResource(id = R.dimen.onboardingStartEnd),
-                end = dimensionResource(id = R.dimen.onboardingStartEnd),
-                top = dimensionResource(id = R.dimen.onboardingStartEnd),
-                bottom = bottomPadding,
-            )
+        modifier = modifier,
     ) {
         Surface(
             shape = RoundedCornerShape(32.dp),
@@ -185,7 +153,7 @@ fun GetStartedButton() {
 }
 
 @Composable
-private fun SystemBarsColor(backgroundColor: Int) {
+private fun SystemBarsColor() {
     val systemUiController = rememberSystemUiController()
     val isDarkMode = isSystemInDarkTheme()
 
