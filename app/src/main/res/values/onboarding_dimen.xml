@@ -5,5 +5,5 @@
     <dimen name="onboardingText">24dp</dimen>
     <dimen name="onboardingStartEnd">32dp</dimen>
     <dimen name="onboardingPageIndicator">46dp</dimen>
-    <dimen name="onboardingNavButtonsBottom">20dp</dimen>
+    <dimen name="onboardingNavButtonsBottom">8dp</dimen>
 </resources>

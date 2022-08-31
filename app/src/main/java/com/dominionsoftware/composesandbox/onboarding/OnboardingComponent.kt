@@ -10,8 +10,10 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -106,6 +108,10 @@ fun OnboardingComponent(
 
 @Composable
 private fun OnboardingNavigationButtons() {
+    val bottomPadding =
+        WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding() +
+                dimensionResource(id = R.dimen.onboardingNavButtonsBottom)
+
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
@@ -115,7 +121,7 @@ private fun OnboardingNavigationButtons() {
                 start = dimensionResource(id = R.dimen.onboardingStartEnd),
                 end = dimensionResource(id = R.dimen.onboardingStartEnd),
                 top = dimensionResource(id = R.dimen.onboardingStartEnd),
-                bottom = dimensionResource(id = R.dimen.onboardingNavButtonsBottom),
+                bottom = bottomPadding,
             )
     ) {
         Text(
@@ -141,6 +147,11 @@ private fun OnboardingNavigationButtons() {
 
 @Composable
 fun GetStartedButton() {
+    val bottomPadding =
+        WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding() + dimensionResource(
+            id = R.dimen.onboardingNavButtonsBottom
+        )
+
     Row(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
@@ -150,7 +161,7 @@ fun GetStartedButton() {
                 start = dimensionResource(id = R.dimen.onboardingStartEnd),
                 end = dimensionResource(id = R.dimen.onboardingStartEnd),
                 top = dimensionResource(id = R.dimen.onboardingStartEnd),
-                bottom = dimensionResource(id = R.dimen.onboardingNavButtonsBottom),
+                bottom = bottomPadding,
             )
     ) {
         Surface(
@@ -175,8 +186,15 @@ fun GetStartedButton() {
 @Composable
 private fun SystemBarsColor(backgroundColor: Int) {
     val systemUiController = rememberSystemUiController()
-    systemUiController.setSystemBarsColor(
-        color = colorResource(id = backgroundColor),
-        darkIcons = isSystemInDarkTheme()
-    )
+    val isDarkMode = isSystemInDarkTheme()
+
+    DisposableEffect(systemUiController, isDarkMode) {
+        systemUiController.setSystemBarsColor(
+            color = Color.Transparent,
+            darkIcons = isDarkMode,
+            isNavigationBarContrastEnforced = false,
+        )
+
+        onDispose {}
+    }
 }
