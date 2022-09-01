@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
+import com.dominionsoftware.composesandbox.onboarding.OnbardingAppNavigation
 import com.dominionsoftware.composesandbox.onboarding.OnboardingMainScreen
 import com.dominionsoftware.composesandbox.ui.theme.ComposeSandboxTheme
 
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
                 ) {
 //                    WaterCounterMainScreen()
 //                    WellnessScreen()
-                    OnboardingMainScreen()
+                    OnbardingAppNavigation()
                 }
             }
         }

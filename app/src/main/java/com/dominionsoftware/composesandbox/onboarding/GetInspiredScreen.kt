@@ -10,13 +10,14 @@ import com.google.accompanist.pager.PagerState
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun GetInspiredScreen(pagerState: PagerState, isLastScreen: Boolean) {
+fun GetInspiredScreen(pagerState: PagerState, onSkipClick: () -> Unit, isLastScreen: Boolean) {
     OnboardingComponent(
         title = R.string.onboardingFirstScreenTitle,
         text = R.string.onboardingFirstScreenText,
         picture = R.drawable.onboarding_pic1,
         backgroundColor = R.color.color1,
         pagerState = pagerState,
+        onSkipClick = onSkipClick,
         isLastScreen = isLastScreen
     )
 }
@@ -26,7 +27,7 @@ fun GetInspiredScreen(pagerState: PagerState, isLastScreen: Boolean) {
 @Composable
 fun OnboardingScreenPreview_GalaxyS20FE() {
     ComposeSandboxTheme {
-        GetInspiredScreen(pagerState = PagerState(0), isLastScreen = false)
+        GetInspiredScreen(pagerState = PagerState(0), onSkipClick = {}, isLastScreen = false)
     }
 }
 
@@ -35,7 +36,7 @@ fun OnboardingScreenPreview_GalaxyS20FE() {
 @Composable
 fun OnboardingScreenDarkModePreview_GalaxyS20FE() {
     ComposeSandboxTheme {
-        GetInspiredScreen(pagerState = PagerState(0), isLastScreen = false)
+        GetInspiredScreen(pagerState = PagerState(0), onSkipClick = {}, isLastScreen = false)
     }
 }
 
@@ -44,6 +45,6 @@ fun OnboardingScreenDarkModePreview_GalaxyS20FE() {
 @Composable
 fun OnboardingScreenPreview_GalaxyS7() {
     ComposeSandboxTheme {
-        GetInspiredScreen(pagerState = PagerState(0), isLastScreen = false)
+        GetInspiredScreen(pagerState = PagerState(0), onSkipClick = {}, isLastScreen = false)
     }
 }

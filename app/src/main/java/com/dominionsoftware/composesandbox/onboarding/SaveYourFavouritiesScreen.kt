@@ -9,13 +9,18 @@ import com.google.accompanist.pager.PagerState
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun SaveYourFavouritiesScreen(pagerState: PagerState, isLastScreen: Boolean) {
+fun SaveYourFavouritiesScreen(
+    pagerState: PagerState,
+    onGetStartedClick: () -> Unit,
+    isLastScreen: Boolean
+) {
     OnboardingComponent(
         title = R.string.onboardingThirdScreenTitle,
         text = R.string.onboardingThirdScreenText,
         picture = R.drawable.onboarding_pic3,
         backgroundColor = R.color.color7,
         pagerState = pagerState,
+        onGetStarted = onGetStartedClick,
         isLastScreen = isLastScreen
     )
 }
@@ -24,7 +29,10 @@ fun SaveYourFavouritiesScreen(pagerState: PagerState, isLastScreen: Boolean) {
 @Preview(name = "GalaxyS 20FE", widthDp = 360, heightDp = 722)
 @Composable
 fun SaveYourFavouritiesScreenPreview_GalaxyS20FE() {
-    SaveYourFavouritiesScreen(pagerState = PagerState(0), isLastScreen = true)
+    SaveYourFavouritiesScreen(
+        pagerState = PagerState(0),
+        isLastScreen = true,
+        onGetStartedClick = {})
 }
 
 @OptIn(ExperimentalPagerApi::class)
@@ -36,12 +44,18 @@ fun SaveYourFavouritiesScreenPreview_GalaxyS20FE() {
 )
 @Composable
 fun SaveYourFavouritiesScreenPreview_GalaxyS20FE_DarkMode() {
-    SaveYourFavouritiesScreen(pagerState = PagerState(0), isLastScreen = true)
+    SaveYourFavouritiesScreen(
+        pagerState = PagerState(0),
+        isLastScreen = true,
+        onGetStartedClick = {})
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Preview(name = "Smaller screen", widthDp = 360, heightDp = 640)
 @Composable
 fun SaveYourFavouritiesScreenPreview_GalaxyS7_LowerScreen() {
-    SaveYourFavouritiesScreen(pagerState = PagerState(0), isLastScreen = true)
+    SaveYourFavouritiesScreen(
+        pagerState = PagerState(0),
+        isLastScreen = true,
+        onGetStartedClick = {})
 }
