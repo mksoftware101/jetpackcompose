@@ -2,7 +2,6 @@ package com.dominionsoftware.composesandbox.onboarding
 
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -39,11 +38,12 @@ fun OnboardingComponent(
     @ColorRes backgroundColor: Int,
     pagerState: PagerState,
     isLastScreen: Boolean,
+    onNextClick: () -> Unit = {},
+    onSkipClick: () -> Unit = {},
+    onGetStarted: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     SystemBarsColor()
-
-    val bottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -56,8 +56,7 @@ fun OnboardingComponent(
         Image(
             painter = painterResource(id = picture),
             contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             contentScale = ContentScale.FillWidth
         )
         Spacer(modifier = Modifier.weight(1f))
@@ -73,14 +72,13 @@ fun OnboardingComponent(
         )
         Spacer(modifier = Modifier.weight(2f))
 
-        val buttonsModifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 32.dp, end = 32.dp, bottom = bottomPadding.plus(8.dp))
+        val bottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+        val buttonsModifier = Modifier.padding(start = 32.dp, end = 32.dp, bottom = bottomPadding)
 
-        if (isLastScreen) {
-            GetStartedButton(buttonsModifier)
+        if (!isLastScreen) {
+            OnboardingNavigationButtons(onSkipClick, onNextClick, buttonsModifier)
         } else {
-            OnboardingNavigationButtons(buttonsModifier)
+            GetStartedButton(onGetStarted, buttonsModifier)
         }
 
     }
@@ -112,57 +110,79 @@ fun TextContent(@StringRes title: Int, @StringRes text: Int, modifier: Modifier)
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-private fun OnboardingNavigationButtons(modifier: Modifier) {
+private fun OnboardingNavigationButtons(
+    onSkipClick: () -> Unit,
+    onNextClick: () -> Unit,
+    modifier: Modifier
+) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
+        modifier = modifier.fillMaxWidth()
     ) {
-        Text(
-            text = stringResource(id = R.string.onboardingButtonSkip),
-            color = MaterialTheme.colors.onPrimary,
-            fontWeight = FontWeight.Light,
-        )
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(
-                text = stringResource(id = R.string.onboardingButtonNext),
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.onPrimary
-            )
-            Spacer(modifier = Modifier.padding(4.dp))
-            Image(
-                imageVector = Icons.Default.ArrowForward,
-                contentDescription = "Next",
-                colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
-            )
-        }
+        SkipButton(onClick = onSkipClick, modifier = Modifier.height(42.dp))
+        NextButton(onClick = onNextClick, modifier = Modifier.height(42.dp))
     }
 }
 
 @Composable
-fun GetStartedButton(modifier: Modifier) {
+private fun SkipButton(onClick: () -> Unit, modifier: Modifier) {
     Row(
-        horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier,
+        modifier = modifier
+            .clickable { onClick() }) {
+        Spacer(modifier = Modifier.width(4.dp))
+        Text(
+            text = stringResource(id = R.string.onboardingButtonSkip),
+            color = MaterialTheme.colors.onPrimary,
+            fontWeight = FontWeight.Light
+        )
+        Spacer(modifier = Modifier.width(4.dp))
+    }
+}
+
+@Composable
+private fun NextButton(onClick: () -> Unit, modifier: Modifier) {
+    Row(verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+            .clickable { onClick() }
     ) {
-        Surface(
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = stringResource(id = R.string.onboardingButtonNext),
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colors.onPrimary
+        )
+        Spacer(modifier = Modifier.padding(4.dp))
+        Image(
+            imageVector = Icons.Default.ArrowForward,
+            contentDescription = "Next",
+            colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
+        )
+    }
+}
+
+@Composable
+fun GetStartedButton(onClick: () -> Unit, modifier: Modifier) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Button(
             shape = RoundedCornerShape(32.dp),
-            modifier = Modifier.weight(1f)
+            colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.color5)),
+            onClick = onClick,
+            modifier = Modifier.fillMaxWidth().height(56.dp)
         ) {
-            Button(
-                colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.color5)),
-                onClick = { /*TODO*/ },
-                modifier = Modifier.height(56.dp)
-            ) {
-                Text(
-                    text = stringResource(id = R.string.onboardingThirdScreenGetStartedButton),
-                    style = MaterialTheme.typography.button.copy(fontSize = 18.sp),
-                    fontWeight = FontWeight.Bold
-                )
-            }
+            Text(
+                text = stringResource(id = R.string.onboardingThirdScreenGetStartedButton),
+                style = MaterialTheme.typography.button.copy(fontSize = 18.sp),
+                fontWeight = FontWeight.Bold
+            )
         }
+        Spacer(modifier = Modifier.height(8.dp))
     }
 }
 
