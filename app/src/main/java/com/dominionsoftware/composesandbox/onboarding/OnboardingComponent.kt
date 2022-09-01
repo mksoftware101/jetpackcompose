@@ -2,6 +2,7 @@ package com.dominionsoftware.composesandbox.onboarding
 
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -50,7 +51,6 @@ fun OnboardingComponent(
             .fillMaxSize()
             .background(colorResource(id = backgroundColor))
             .verticalScroll(rememberScrollState())
-            .padding(start = 32.dp, end = 32.dp, bottom = bottomPadding)
     ) {
         Spacer(modifier = Modifier.weight(1f))
         Image(
@@ -61,6 +61,37 @@ fun OnboardingComponent(
             contentScale = ContentScale.FillWidth
         )
         Spacer(modifier = Modifier.weight(1f))
+        TextContent(
+            title = title,
+            text = text,
+            modifier = Modifier.padding(start = 32.dp, end = 32.dp)
+        )
+        HorizontalPagerIndicator(
+            pagerState = pagerState,
+            activeColor = MaterialTheme.colors.onPrimary,
+            modifier = Modifier.padding(top = 36.dp)
+        )
+        Spacer(modifier = Modifier.weight(2f))
+
+        val buttonsModifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 32.dp, end = 32.dp, bottom = bottomPadding.plus(8.dp))
+
+        if (isLastScreen) {
+            GetStartedButton(buttonsModifier)
+        } else {
+            OnboardingNavigationButtons(buttonsModifier)
+        }
+
+    }
+}
+
+@Composable
+fun TextContent(@StringRes title: Int, @StringRes text: Int, modifier: Modifier) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+    ) {
         Text(
             text = stringResource(id = title),
             color = MaterialTheme.colors.onPrimary,
@@ -78,23 +109,6 @@ fun OnboardingComponent(
             modifier = Modifier
                 .padding(top = 24.dp)
         )
-        HorizontalPagerIndicator(
-            pagerState = pagerState,
-            activeColor = MaterialTheme.colors.onPrimary,
-            modifier = Modifier
-                .padding(top = 36.dp)
-        )
-        Spacer(modifier = Modifier.weight(2f))
-
-        val buttonsModifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 8.dp)
-
-        if (isLastScreen) {
-            GetStartedButton(buttonsModifier)
-        } else {
-            OnboardingNavigationButtons(buttonsModifier)
-        }
     }
 }
 
