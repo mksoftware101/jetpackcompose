@@ -9,7 +9,12 @@ import com.google.accompanist.pager.PagerState
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun EasyAndHealthyScreen(pagerState: PagerState, onSkipClick: () -> Unit, isLastScreen: Boolean) {
+fun EasyAndHealthyScreen(
+    pagerState: PagerState,
+    onSkipClick: () -> Unit,
+    onNextClick: () -> Unit,
+    isLastScreen: Boolean
+) {
     OnboardingComponent(
         title = R.string.onboardingSecondScreenTitle,
         text = R.string.onboardingSecondScreenText,
@@ -17,6 +22,7 @@ fun EasyAndHealthyScreen(pagerState: PagerState, onSkipClick: () -> Unit, isLast
         backgroundColor = R.color.color4,
         pagerState = pagerState,
         onSkipClick = onSkipClick,
+        onNextClick = onNextClick,
         isLastScreen = isLastScreen
     )
 }
@@ -25,19 +31,34 @@ fun EasyAndHealthyScreen(pagerState: PagerState, onSkipClick: () -> Unit, isLast
 @Preview(name = "GalaxyS 20FE", widthDp = 360, heightDp = 722)
 @Composable
 fun EasyAndHealthyScreenPreview_GalaxyS20FE() {
-    EasyAndHealthyScreen(pagerState = PagerState(0), isLastScreen = false, onSkipClick = {})
+    EasyAndHealthyScreen(
+        pagerState = PagerState(0),
+        isLastScreen = false,
+        onSkipClick = {},
+        onNextClick = {},
+    )
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Preview(name = "GalaxyS 20FE dark mode", widthDp = 360, heightDp = 722, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun EasyAndHealthyScreenPreview_GalaxyS20FE_DarkMode() {
-    EasyAndHealthyScreen(pagerState = PagerState(0), isLastScreen = false, onSkipClick = {})
+    EasyAndHealthyScreen(
+        pagerState = PagerState(0),
+        isLastScreen = false,
+        onSkipClick = {},
+        onNextClick = {},
+    )
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Preview(name = "Smaller screen", widthDp = 360, heightDp = 640)
 @Composable
 fun OnboardingScreenPreview_GalaxyS7_LowerScreen() {
-    EasyAndHealthyScreen(pagerState = PagerState(0), isLastScreen = false, onSkipClick = {})
+    EasyAndHealthyScreen(
+        pagerState = PagerState(0),
+        isLastScreen = false,
+        onSkipClick = {},
+        onNextClick = {},
+    )
 }

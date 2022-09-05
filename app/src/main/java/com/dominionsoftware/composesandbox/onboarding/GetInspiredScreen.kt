@@ -10,7 +10,12 @@ import com.google.accompanist.pager.PagerState
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun GetInspiredScreen(pagerState: PagerState, onSkipClick: () -> Unit, isLastScreen: Boolean) {
+fun GetInspiredScreen(
+    pagerState: PagerState,
+    onSkipClick: () -> Unit,
+    onNextClick: () -> Unit,
+    isLastScreen: Boolean
+) {
     OnboardingComponent(
         title = R.string.onboardingFirstScreenTitle,
         text = R.string.onboardingFirstScreenText,
@@ -18,6 +23,7 @@ fun GetInspiredScreen(pagerState: PagerState, onSkipClick: () -> Unit, isLastScr
         backgroundColor = R.color.color1,
         pagerState = pagerState,
         onSkipClick = onSkipClick,
+        onNextClick = onNextClick,
         isLastScreen = isLastScreen
     )
 }
@@ -27,7 +33,12 @@ fun GetInspiredScreen(pagerState: PagerState, onSkipClick: () -> Unit, isLastScr
 @Composable
 fun OnboardingScreenPreview_GalaxyS20FE() {
     ComposeSandboxTheme {
-        GetInspiredScreen(pagerState = PagerState(0), onSkipClick = {}, isLastScreen = false)
+        GetInspiredScreen(
+            pagerState = PagerState(0),
+            onSkipClick = {},
+            onNextClick = {},
+            isLastScreen = false
+        )
     }
 }
 
@@ -36,7 +47,12 @@ fun OnboardingScreenPreview_GalaxyS20FE() {
 @Composable
 fun OnboardingScreenDarkModePreview_GalaxyS20FE() {
     ComposeSandboxTheme {
-        GetInspiredScreen(pagerState = PagerState(0), onSkipClick = {}, isLastScreen = false)
+        GetInspiredScreen(
+            pagerState = PagerState(0),
+            onSkipClick = {},
+            onNextClick = {},
+            isLastScreen = false
+        )
     }
 }
 
@@ -45,6 +61,11 @@ fun OnboardingScreenDarkModePreview_GalaxyS20FE() {
 @Composable
 fun OnboardingScreenPreview_GalaxyS7() {
     ComposeSandboxTheme {
-        GetInspiredScreen(pagerState = PagerState(0), onSkipClick = {}, isLastScreen = false)
+        GetInspiredScreen(
+            pagerState = PagerState(0),
+            onSkipClick = {},
+            onNextClick = {},
+            isLastScreen = false
+        )
     }
 }
