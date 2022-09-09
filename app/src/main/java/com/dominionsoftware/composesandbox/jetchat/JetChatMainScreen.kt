@@ -14,8 +14,6 @@ fun JetChatMainScreen() {
             name = "#composers",
             membersCount = "42 members",
             onOpenSidebar = {},
-            onSearchClick = {},
-            onInfoClick = {},
             modifier = Modifier.statusBarsPadding()
         )
         Messages(modifier = Modifier.padding(all = 16.dp))
