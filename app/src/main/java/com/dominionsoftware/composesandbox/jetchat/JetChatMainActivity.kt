@@ -17,9 +17,7 @@ class JetChatMainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             JetchatTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    JetChatMainScreen()
-                }
+                JetChatMainScreen()
             }
         }
     }
